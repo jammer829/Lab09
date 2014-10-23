@@ -125,7 +125,7 @@ CD** SortPlot::randomCDs(int num_to_create, int num_characters)
    return cds;
 }
 
-int main(int argc, char** argv)
+/*int main(int argc, char** argv)
 {
    Gtk::Main kit(argc, argv);
 
@@ -159,4 +159,4 @@ int main(int argc, char** argv)
    Gtk::Main::run(win);
 
    return 0;
-}
+}*/
