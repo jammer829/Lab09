@@ -1,3 +1,4 @@
+//GITHUB REPOSITORY: https://github.com/jammer829/Lab09
 #include "SortPlot.h"
 #include "Sort.h"
 #include "Random.h"
@@ -85,7 +86,7 @@ void SortPlot::sort(CD** cds, int num_to_sort, int sort_method)
    }
    else if (sort_method == 5)
    {
-      //sorted = Sort<CD>::heapSort(cds, num_to_sort, &CD::compare_items);
+      sorted = Sort<CD>::heapSort(cds, num_to_sort, &CD::compare_items);
    }
 
    delete[] sorted;
@@ -125,7 +126,7 @@ CD** SortPlot::randomCDs(int num_to_create, int num_characters)
    return cds;
 }
 
-/*int main(int argc, char** argv)
+int main(int argc, char** argv)
 {
    Gtk::Main kit(argc, argv);
 
@@ -159,4 +160,4 @@ CD** SortPlot::randomCDs(int num_to_create, int num_characters)
    Gtk::Main::run(win);
 
    return 0;
-}*/
+}

@@ -1,6 +1,9 @@
 #if !defined (SORT_H)
 #define SORT_H
 
+#include <iostream>
+using namespace std;
+
 template < class T >
 class Sort
 {
@@ -59,18 +62,10 @@ void Sort<T>::_quickSort(T** items, int first, int last, int (*compare) (T* one,
    //make the necessary partition and recursive calls for quick sort
    if (first < last)
    {
-      int pivot = partition(items, first, last, compare);
+      pivotIndex = partition(items, first, last, compare);
 
-      _quickSort(items, first, pivot - 1);
-      _quickSort(items, pivot + 1, last);
-
-
-
-
-
-
-
-
+      _quickSort(items, first, pivotIndex - 1, compare);
+      _quickSort(items, pivotIndex + 1, last, compare);
    }  
 }  
 
@@ -82,11 +77,28 @@ int Sort<T>::partition(T** items, int first, int last, int (*compare) (T* one, T
 
    //temp is used to swap elements in the array
    T* temp; 
+   //int q_compare;
+   int lastS1 = first;
+   choosePivot(items, first, last);
 
-   //initially, choosePivot does nothing           
-   choosePivot(items, first, last); 
+   //initially, choosePivot does nothing
+   for (int i = first + 1; i <= last; i++)
+   {
+      //q_compare = (*compare) (items[first], items[i]);
+      if ((*compare) (items[i], items[first]) < 0)  
+      {
+         lastS1 = lastS1 + 1;
+         temp = items[i];
+         items[i] = items[lastS1];
+         items[lastS1] = temp;
+      }
+      //else cout << "Not swapping in partition" << endl;
+   }
+   temp = items[lastS1];
+   items[lastS1] = items[first];
+   items[first] = temp;
 
-
+   return lastS1;
 }
 
 template < class T >
@@ -96,8 +108,10 @@ void Sort<T>::choosePivot(T** items, int first, int last)
    //find a better item to be the partition than simply using the item in the first index
    //you will need to swap
 
-
-
+   int mid = (first + last)/2;
+   T* temp = items[first];
+   items[first] = items[mid];
+   items[mid] = temp;
 }
 
 //no work below this point
